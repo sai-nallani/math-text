@@ -136,6 +136,8 @@
   background-color: white;
   border-radius: 8px;
   max-width: 70%;
+  position: relative;
+  transition: background-color 0.2s ease;
 }
 
 .message-item.own-message {
@@ -143,9 +145,12 @@
   background-color: #e3f2fd;
 }
 
+.message-item.own-message:hover {
+  background-color: #d4e9fc;
+}
+
 .username {
   font-weight: bold;
-  margin-right: 10px;
   color: #2c3e50;
 }
 
@@ -352,4 +357,49 @@
   overflow-x: auto;
   overflow-y: hidden;
   max-width: 100%;
+}
+
+/* Message Header and Delete Button */
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.delete-message {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.message-item:hover .delete-message {
+  opacity: 1;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.delete-message:hover {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.2);
+  transform: scale(1.1);
+}
+
+.delete-message:active {
+  transform: scale(0.95);
 }

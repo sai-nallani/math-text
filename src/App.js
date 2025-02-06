@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { db } from './firebase';
 // Import any Firestore methods you need, for example:
-import { collection, addDoc, getDocs, query, orderBy, onSnapshot, where, doc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, onSnapshot, where, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';  // You'll need to run: npm install js-cookie
 import { unified } from 'unified';
@@ -277,6 +277,14 @@ function ChatRoom({ username }) {
     }
   };
 
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      await deleteDoc(doc(db, 'messages', messageId));
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
+
   useEffect(() => {
     // Fetch rooms
     const roomsRef = collection(db, 'rooms');
@@ -379,14 +387,27 @@ function ChatRoom({ username }) {
                 key={message.id}
                 className={`message-item ${message.username === username ? 'own-message' : ''}`}
               >
-                <span className="username">{message.username}</span>
-                <span className="timestamp">
-                  {message.createdAt instanceof Date 
-                    ? message.createdAt.toLocaleTimeString()
-                    : message.createdAt.toDate().toLocaleTimeString()}
-                </span>
+                <div className="message-header">
+                  <span className="username">{message.username}</span>
+                  <span className="timestamp">
+                    {message.createdAt instanceof Date 
+                      ? message.createdAt.toLocaleTimeString()
+                      : message.createdAt.toDate().toLocaleTimeString()}
+                  </span>
+                  {message.username === username && (
+                    <button 
+                      className="delete-message"
+                      onClick={() => handleDeleteMessage(message.id)}
+                      title="Delete message"
+                    >
+                      ×
+                    </button>
+                  )}
+                </div>
                 <div className="message-content">
-                  {message.message}
+                  {message.message.split('\n').map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
                 </div>
               </div>
             ))}
