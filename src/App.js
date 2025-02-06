@@ -130,6 +130,33 @@ function ChatRoom({ username }) {
     });
   }, [authorizedRooms]);
 
+  // Add this useEffect to initialize MathJax configuration
+  useEffect(() => {
+    if (window.MathJax) {
+      window.MathJax = {
+        ...window.MathJax,
+        tex: {
+          inlineMath: [['$', '$']],
+          displayMath: [['$$', '$$']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    }
+  }, []);
+
+  // Add this useEffect to render math when messages change
+  useEffect(() => {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      try {
+        window.MathJax.typesetPromise();
+      } catch (error) {
+        console.error('MathJax error:', error);
+      }
+    }
+  }, [messages]);
+
   const createRoom = async () => {
     if (!newRoomName.trim() || !newRoomPassword.trim()) {
       alert('Please provide both room name and password');
@@ -358,17 +385,23 @@ function ChatRoom({ username }) {
                     ? message.createdAt.toLocaleTimeString()
                     : message.createdAt.toDate().toLocaleTimeString()}
                 </span>
-                <div className="message-content">{message.message}</div>
+                <div className="message-content">
+                  {message.message}
+                </div>
               </div>
             ))}
           </div>
           <div className="message-input-container">
             <textarea 
-              placeholder="Type a message... (Shift+Enter for new line)
-Formatting: **bold**, *italic*, `code`, $x^2$ for inline math, $$\sum_{i=1}^n$$ for block math"
+              placeholder="Type a message... Use $...$ for inline math and $$...$$ for display math"
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
             />
             <button onClick={handleSendMessage}>Send</button>
           </div>

@@ -172,6 +172,9 @@
   border-radius: 4px;
   font-size: 16px;
   min-width: 0;
+  resize: none;
+  min-height: 40px;
+  font-family: inherit;
 }
 
 .message-input-container button {
@@ -337,4 +340,16 @@
   background-color: rgba(231, 76, 60, 0.1);
   border-radius: 4px;
   font-size: 0.9em;
+}
+
+/* Add styles for MathJax output */
+.message-content {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.MathJax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
 }
