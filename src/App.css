@@ -1,0 +1,340 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Login Styles */
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-container input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-container button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+  background-color: #45a049;
+}
+
+.error {
+  color: #ff4444;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Chat Room Styles */
+.chat-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.rooms-sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-room {
+  margin-bottom: 20px;
+}
+
+.create-room input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.create-room button {
+  width: 100%;
+  padding: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.rooms-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.room-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.room-item:hover {
+  background-color: #34495e;
+}
+
+.room-item.selected {
+  background-color: #3498db;
+}
+
+.chat-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.message-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.message-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.message-item.own-message {
+  margin-left: auto;
+  background-color: #e3f2fd;
+}
+
+.username {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #2c3e50;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.message-input-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+}
+
+.message-input-container textarea {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  min-width: 0;
+}
+
+.message-input-container button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.no-room-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+  font-size: 1.2em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-container {
+    flex-direction: column;
+  }
+
+  .rooms-sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+
+  .message-item {
+    max-width: 85%;
+  }
+}
+
+/* Password Modal Styles */
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.password-modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.password-modal-content h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.5em;
+}
+
+.password-modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.password-modal-content input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.password-modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.password-modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.1s, background-color 0.3s;
+}
+
+.password-modal-buttons button:active {
+  transform: scale(0.98);
+}
+
+.password-modal-buttons button:first-child {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.password-modal-buttons button:first-child:hover {
+  background-color: #45a049;
+}
+
+.password-modal-buttons button:last-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.password-modal-buttons button:last-child:hover {
+  background-color: #c0392b;
+}
+
+/* Header Styles */
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Adjust chat container for header */
+.chat-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Error message styling */
+.error {
+  color: #e74c3c;
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: 4px;
+  font-size: 0.9em;
+}
