@@ -12,6 +12,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeKatex from 'rehype-katex';
 import rehypeStringify from 'rehype-stringify';
 import 'katex/dist/katex.min.css';
+import { HashRouter as Router } from 'react-router-dom';
 
 function Login({ setUsername, setLoggedIn }) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -461,7 +462,7 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       {!loggedIn ? (
         <Login setUsername={handleLoginSuccess} setLoggedIn={setLoggedIn}/>
       ) : (
@@ -473,7 +474,7 @@ function App() {
           <ChatRoom username={username} />
         </div>
       )}
-    </>
+    </Router>
   );
 }
 
